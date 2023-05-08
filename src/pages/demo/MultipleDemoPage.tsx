@@ -50,7 +50,7 @@ const MultipleDemoPage = () => {
 
       <Demo title={"ComboBox can render content using custom component"}>
         <ComboBox
-          searchPlaceholder="Choose a Fruit:"
+          searchPlaceholder="Choose a custom fruit:"
           items={FRUIT_LIST}
           selectedItem={selectedFruit2}
           onChange={setSelectedFruit2}

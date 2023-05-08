@@ -11,11 +11,20 @@ export interface ComboBoxProps<T> {
   items: T[];
   selectedItem: T | undefined;
   onChange: (value: T | undefined) => void;
-  getItemTitle: (value: T) => string;
   getItemId: (value: T) => string;
+  getItemTitle: (value: T) => string;
+  doesItemMatch?: (value: T, query: string) => boolean;
   entityType: string;
   ItemComponent: React.FC<T>;
 }
+
+export const defaultMatcher = <T extends object>(
+  getItemTitle: (t: T) => any
+) => {
+  return (item: T, query: string) => {
+    return `${getItemTitle(item)}`.toLowerCase().includes(query.toLowerCase());
+  };
+};
 
 const ComboBox = <T extends object>({
   searchPlaceholder = "Start typing",
@@ -23,6 +32,7 @@ const ComboBox = <T extends object>({
   entityType,
   selectedItem,
   getItemTitle,
+  doesItemMatch = defaultMatcher(getItemTitle),
   getItemId,
   onChange,
   ItemComponent,
@@ -67,8 +77,8 @@ const ComboBox = <T extends object>({
     if (value === "") {
       return items;
     }
-    return items.filter((item) => getItemTitle(item).includes(value));
-  }, [items, value]);
+    return items.filter((item) => doesItemMatch(item, value));
+  }, [items, doesItemMatch]);
 
   const focusPrevious = useCallback(() => {
     openPopup();
