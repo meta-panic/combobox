@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from "react";
+import React, { useCallback, useEffect } from "react";
 
 import styles from "./ItemList.module.scss";
 import cx from "classnames";
@@ -13,6 +13,7 @@ interface ItemListProps<T> {
   entityType: string;
   getItemId: (value: T) => string;
   ItemComponent: React.FC<T>;
+  isExpanded: boolean;
 }
 
 const ItemListComponent = <T extends object>({
@@ -24,6 +25,7 @@ const ItemListComponent = <T extends object>({
   selectedItem,
   getItemId,
   ItemComponent,
+  isExpanded,
 }: ItemListProps<T>) => {
   return (
     <ul
@@ -41,6 +43,7 @@ const ItemListComponent = <T extends object>({
           isSelected={selectedItem === item}
           isFocused={item === focusedItem}
           ItemComponent={ItemComponent}
+          isExpanded={isExpanded}
         />
       ))}
     </ul>
@@ -54,6 +57,7 @@ interface ItemProps<T> {
   item: T;
   handleItemClick: (item: T) => void;
   ItemComponent: React.FC<T>;
+  isExpanded: boolean;
 }
 
 const Item = <T extends object>({
@@ -63,20 +67,21 @@ const Item = <T extends object>({
   isSelected,
   isFocused,
   ItemComponent,
+  isExpanded,
 }: ItemProps<T>) => {
   const onClick = useCallback(() => {
     handleItemClick(item);
   }, [item, handleItemClick]);
   useEffect(() => {
-    if (isFocused) {
+    if (isFocused && isExpanded) {
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({
           behavior: "smooth",
-          block: "center"
+          block: "center",
         });
       });
     }
-  }, [isFocused, id]);
+  }, [isFocused, isExpanded, id]);
   return (
     <li
       role="option"

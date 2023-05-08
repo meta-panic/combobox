@@ -37,6 +37,9 @@ const ComboBox = <T extends object>({
     () => setIsPopupVisible(true),
     [setIsPopupVisible]
   );
+  const onFocus = useCallback(() => {
+    openPopup();
+  }, [openPopup]);
 
   const controlsId = useMemo(() => {
     return generateId();
@@ -58,9 +61,7 @@ const ComboBox = <T extends object>({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [focusedItemIndex, setFocusedItemIndex] = useState<number | undefined>(
-    undefined
-  );
+  const [focusedItemIndex, setFocusedItemIndex] = useState(0);
 
   const filteredItems = useMemo(() => {
     if (value === "") {
@@ -134,7 +135,7 @@ const ComboBox = <T extends object>({
       >
         <SearchField
           placeholder={searchPlaceholder}
-          onFocus={openPopup}
+          onFocus={onFocus}
           text={value}
           onSelectPreviousOption={focusPrevious}
           onSelectNextOption={focusNext}
@@ -157,6 +158,7 @@ const ComboBox = <T extends object>({
           focusedItem={focusedItem}
           getItemId={getItemId}
           ItemComponent={ItemComponent}
+          isExpanded={isPopupVisible}
         />
       </div>
     </div>
