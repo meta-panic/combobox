@@ -18,7 +18,7 @@ interface SearchFieldProps<T> {
   onSelectOption: () => void;
   onClear: () => void;
   onBlur: () => void;
-  selectedItem: T | undefined;
+  focusedItem: T | undefined;
   getItemId: (item: T) => string;
   inputRef: Ref<HTMLInputElement>;
 }
@@ -35,7 +35,7 @@ const SearchFieldComponent = <T extends object>({
   onBlur,
   isExpanded,
   controlsId,
-  selectedItem,
+  focusedItem,
   getItemId,
   inputRef,
 }: SearchFieldProps<T>) => {
@@ -80,7 +80,7 @@ const SearchFieldComponent = <T extends object>({
         aria-controls={controlsId}
         aria-autocomplete={"list"}
         aria-activedescendant={
-          selectedItem ? controlsId + ":" + getItemId(selectedItem) : ""
+          focusedItem ? controlsId + ":" + getItemId(focusedItem) : ""
         }
       />
       <ChevronIcon className={styles.chevronIcon} />
