@@ -7,7 +7,11 @@ export const CustomFruitComponent = ({ name, emoji }: Fruit) => {
     <div className={styles.custom}>
       <div className={styles.emojiWrapper}>{emoji}</div>
       {[...Array(4)].map((_, idx) => (
-        <div className={styles.text} style={{ "--idx": idx } as CSSProperties}>
+        <div
+          className={styles.text}
+          style={{ "--idx": idx } as CSSProperties}
+          key={idx}
+        >
           {name}
         </div>
       ))}
