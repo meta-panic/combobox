@@ -158,7 +158,6 @@ const ComboBox = <T extends object>({
           focusedItem={focusedItem}
           getItemId={getItemId}
           ItemComponent={ItemComponent}
-          isExpanded={isPopupVisible}
         />
       </div>
     </div>

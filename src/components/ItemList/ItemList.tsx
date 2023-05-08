@@ -13,7 +13,6 @@ interface ItemListProps<T> {
   entityType: string;
   getItemId: (value: T) => string;
   ItemComponent: React.FC<T>;
-  isExpanded: boolean;
 }
 
 const ItemListComponent = <T extends object>({
@@ -25,7 +24,6 @@ const ItemListComponent = <T extends object>({
   selectedItem,
   getItemId,
   ItemComponent,
-  isExpanded,
 }: ItemListProps<T>) => {
   return (
     <ul
@@ -43,7 +41,6 @@ const ItemListComponent = <T extends object>({
           isSelected={selectedItem === item}
           isFocused={item === focusedItem}
           ItemComponent={ItemComponent}
-          isExpanded={isExpanded}
         />
       ))}
     </ul>
@@ -57,7 +54,6 @@ interface ItemProps<T> {
   item: T;
   handleItemClick: (item: T) => void;
   ItemComponent: React.FC<T>;
-  isExpanded: boolean;
 }
 
 const Item = <T extends object>({
@@ -67,13 +63,12 @@ const Item = <T extends object>({
   isSelected,
   isFocused,
   ItemComponent,
-  isExpanded,
 }: ItemProps<T>) => {
   const onClick = useCallback(() => {
     handleItemClick(item);
   }, [item, handleItemClick]);
   useEffect(() => {
-    if (isFocused && isExpanded) {
+    if (isFocused) {
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({
           behavior: "smooth",
@@ -81,7 +76,7 @@ const Item = <T extends object>({
         });
       });
     }
-  }, [isFocused, isExpanded, id]);
+  }, [isFocused, id]);
   return (
     <li
       role="option"
