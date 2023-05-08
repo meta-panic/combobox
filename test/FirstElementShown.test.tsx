@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import DemoPage from "../src/pages/demo/DemoPage";
-import {setupTests} from "./Setup";
+import { setupPolyfills, user, getByRoleAndText } from "./Setup";
 
-const { user, getByRoleAndText } = setupTests();
+setupPolyfills();
 
 test("Loads and displays placeholder", async () => {
   render(<DemoPage />);
