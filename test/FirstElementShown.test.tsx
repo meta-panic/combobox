@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import App from "../src/App";
+import userEvent from "@testing-library/user-event";
 
 function getByRoleAndText(role: string, text: string) {
   return screen.getAllByRole(role).find((e) => e.textContent?.includes(text));
@@ -13,21 +14,23 @@ test("Loads and displays placeholder", async () => {
 
 test("Displays items after click on input ", async () => {
   render(<App />);
-  screen.getByPlaceholderText("Choose a Fruit:").click();
-  expect(getByRoleAndText("button", "Apple")).toBeVisible();
-  expect(getByRoleAndText("button", "Banana")).toBeVisible();
-  expect(getByRoleAndText("button", "Pear")).toBeVisible();
-  expect(getByRoleAndText("button", "Pineapple")).toBeVisible();
-  expect(getByRoleAndText("button", "Mango")).toBeVisible();
+  const user = userEvent.setup();
+  user.click(screen.getByPlaceholderText("Choose a Fruit:")) ;
+  expect(getByRoleAndText("option", "Apple")).toBeVisible();
+  expect(getByRoleAndText("option", "Banana")).toBeVisible();
+  expect(getByRoleAndText("option", "Pear")).toBeVisible();
+  expect(getByRoleAndText("option", "Pineapple")).toBeVisible();
+  expect(getByRoleAndText("option", "Mango")).toBeVisible();
 });
 
 test("Does not display items after click on item ", async () => {
   render(<App />);
-  screen.getByPlaceholderText("Choose a Fruit:").click();
-  screen.getByText("Apple").click();
-  expect(screen.getByText("Apple")).toBeNull();
-  expect(screen.getByText("Banana")).toBeNull();
-  expect(screen.getByText("Pear")).toBeNull();
-  expect(screen.getByText("Pineapple")).toBeNull();
-  expect(screen.getByText("Mango")).toBeNull();
+  const user = userEvent.setup();
+  user.click(screen.getByPlaceholderText("Choose a Fruit:"));
+  user.click(screen.getByText("Apple"));
+  expect(screen.queryByText("Apple")).toBeNull();
+  expect(screen.queryByText("Banana")).toBeNull();
+  expect(screen.queryByText("Pear")).toBeNull();
+  expect(screen.queryByText("Pineapple")).toBeNull();
+  expect(screen.queryByText("Mango")).toBeNull();
 });
