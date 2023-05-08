@@ -2,6 +2,7 @@
   height: 60px;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid #0006;
 }
 
 .emojiWrapper {
@@ -15,8 +16,8 @@
   position: absolute;
   font-size: 24px;
   text-shadow: 0 0 4px #000;
-  left: calc(var(--idx) * 4px);
-  top: calc(var(--idx) * 4px);
+  left: calc(10px + var(--idx) * 4px);
+  top: calc(10px + var(--idx) * 4px);
   color: hsl(
                   calc(var(--idx) * 20),
                   100%,
