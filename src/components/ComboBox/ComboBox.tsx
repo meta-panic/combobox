@@ -70,7 +70,7 @@ const ComboBox = ({
     const onSelectOption = useCallback(() => {
         const item = filteredItems[focusedItemIndex];
         setSelectedItem(item);
-        setValue(item.name);
+        setValue(item?.name || "");
         closePopup();
     }, [filteredItems, focusedItemIndex, closePopup]);
 
@@ -83,13 +83,15 @@ const ComboBox = ({
     const changeValue = useCallback((v: string) => {
         setFocusedItemIndex(0);
         setValue(v);
-    }, []);
+        openPopup();
+    }, [openPopup]);
 
     return (
         <div
-            className={cx(styles.comboBoxWrapper, {
-                [styles.active]: isPopupVisible,
-            })}
+            className={cx(
+                styles.comboBoxWrapper,
+                isPopupVisible && styles.active
+            )}
         >
             <SearchField
                 placeholder={searchPlaceholder}
