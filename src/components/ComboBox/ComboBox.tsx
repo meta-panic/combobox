@@ -38,7 +38,9 @@ const ComboBox = <T extends object>({
     [setPopupVisibility]
   );
 
-  const controlsId = generateId();
+  const controlsId = useMemo(() => {
+    return generateId();
+  }, []);
 
   const [value, setValue] = useState("");
 
@@ -107,7 +109,12 @@ const ComboBox = <T extends object>({
     <div
       className={cx(styles.comboBoxWrapper, isPopupVisible && styles.active)}
     >
-      <div className={cx(styles.comboBoxContent, isPopupVisible && styles.contentActive)}>
+      <div
+        className={cx(
+          styles.comboBoxContent,
+          isPopupVisible && styles.contentActive
+        )}
+      >
         <SearchField
           placeholder={searchPlaceholder}
           onFocus={openPopup}
