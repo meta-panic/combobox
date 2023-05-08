@@ -6,9 +6,9 @@ export const FruitComponent = ({ name, emoji }: Fruit) => {
   return (
     <div className={styles.fruit}>
       {emoji && (
-        <div className={styles.emojiWrapper} role={"presentation"}>
+        <span className={styles.emojiWrapper} role={"presentation"}>
           {emoji}
-        </div>
+        </span>
       )}
       {name}
     </div>
