@@ -39,13 +39,3 @@
   $bp-tablets: "(min-width: 481px) and (max-width: 767px)";
   $bp-tablets-portrait-mode: "(min-width: 768px) and (max-width: 1024px)";
   $bp-desktop: "(min-width: 1025px)";
-
-  /*
-  * Icon sizing
-  */
-  $icon-size-base: calc(1rem / 16);
-  $icon-size-xs: $icon-size-base  * 8;
-  $icon-size-s: $icon-size-base * 16;
-  $icon-size-m: $icon-size-base * 32;
-  $icon-size-l: $icon-size-base * 64;
-  $icon-size-xl: $icon-size-base * 128;

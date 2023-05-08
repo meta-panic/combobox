@@ -4,11 +4,13 @@
 }
 
 .inputField {
+  height: 42px;
   line-height: 2rem;
-  width: 200px;
+  width: 265px;
   border: 0;
   border-radius: 5px;
-  padding: 0 $space-s;
+  padding: 0 13px;
+  font-size: 12px;
 
   &:not(:focus) {
     background: $focus;
@@ -16,6 +18,10 @@
 
   &:focus {
     outline: none;
+  }
+
+  &::placeholder {
+    color: $grey-3;
   }
 
   @include bp($bp-phone) {
@@ -33,11 +39,11 @@
   pointer-events: none;
 
   vertical-align: baseline;
-  width: $icon-size-s;
-  height: $icon-size-s;
+  width: 10px;
+  height: 10px;
 
   margin: auto;
-  right: $space-s;
+  right: 14px;
   top: 50%;
   fill: $color-type-icon;
   transform: translate(0, -50%);

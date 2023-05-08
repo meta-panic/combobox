@@ -2,11 +2,15 @@
 @import '../styles/variables';
 @import '../node_modules/css-reset-and-normalize/scss/reset-and-normalize';
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body, input {
   background-color: $color-type-body;
   color: $color-type-font;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   line-height: $base-font-lineheight;
 }
