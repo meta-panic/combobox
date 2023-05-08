@@ -30,11 +30,11 @@ test("Displays items after click on input", async () => {
 test("Does not display items after click on item", async () => {
   render(<DemoPage />);
   await user.click(screen.getByPlaceholderText("Choose a Fruit:"));
-  expect(getByRoleAndText("option", "Apple")).toBeVisible();
-  await user.click(screen.getByText("Apple"));
+  expect(getByRoleAndText("option", "Pineapple")).toBeVisible();
+  await user.click(screen.getByText("Pineapple"));
+  expect(screen.queryByText("Apple")).toBeNull();
   expect(screen.queryByText("Banana")).toBeNull();
   expect(screen.queryByText("Pear")).toBeNull();
-  expect(screen.queryByText("Pineapple")).toBeNull();
   expect(screen.queryByText("Mango")).toBeNull();
 });
 
