@@ -78,7 +78,11 @@ const ComboBox = ({
         setSelectedItem(undefined);
         setValue("");
         closePopup();
-    }, []);
+    }, [closePopup]);
+
+    const onBlur = useCallback(() => {
+        closePopup();
+    }, [closePopup]);
 
     const changeValue = useCallback((v: string) => {
         setFocusedItemIndex(0);
@@ -101,6 +105,7 @@ const ComboBox = ({
                 onSelectNextOption={focusNext}
                 onSelectOption={onSelectOption}
                 onClear={onClear}
+                onBlur={onBlur}
                 selectedItem={selectedItem}
                 onChange={changeValue}
                 isExpanded={isPopupVisible}

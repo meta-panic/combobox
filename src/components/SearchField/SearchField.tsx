@@ -21,6 +21,7 @@ interface SearchFieldProps {
     onSelectNextOption: () => void,
     onSelectOption: () => void,
     onClear: () => void,
+    onBlur: () => void,
     selectedItem: ListItem | undefined,
 }
 
@@ -34,6 +35,7 @@ const SearchField: FC<SearchFieldProps> = memo(
          onSelectOption,
          onFocus,
          onClear,
+         onBlur,
          isExpanded,
          controlsId,
          selectedItem,
@@ -68,6 +70,7 @@ const SearchField: FC<SearchFieldProps> = memo(
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
                     onFocus={onFocus}
+                    onBlur={onBlur}
                     role="combobox"
                     aria-expanded={isExpanded}
                     aria-controls={controlsId}
