@@ -19,7 +19,7 @@ export interface ComboBoxProps<T> {
 }
 
 export const defaultMatcher = <T extends object>(
-  getItemTitle: (t: T) => any
+  getItemTitle: (t: T) => unknown
 ) => {
   return (item: T, query: string) => {
     return `${getItemTitle(item)}`.toLowerCase().includes(query.toLowerCase());
@@ -66,7 +66,7 @@ const ComboBox = <T extends object>({
         closePopup();
       });
     },
-    [isPopupVisible, closePopup, getItemTitle]
+    [closePopup, getItemTitle]
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -78,7 +78,7 @@ const ComboBox = <T extends object>({
       return items;
     }
     return items.filter((item) => doesItemMatch(item, value));
-  }, [items, doesItemMatch]);
+  }, [value, items, doesItemMatch]);
 
   const focusPrevious = useCallback(() => {
     openPopup();
@@ -106,7 +106,14 @@ const ComboBox = <T extends object>({
     onChange(item);
     setValue(item ? getItemTitle(item) : "");
     closePopup();
-  }, [isPopupVisible, onChange, filteredItems, focusedItemIndex, closePopup]);
+  }, [
+    isPopupVisible,
+    getItemTitle,
+    onChange,
+    filteredItems,
+    focusedItemIndex,
+    closePopup,
+  ]);
 
   const onClear = useCallback(() => {
     onChange(undefined);
