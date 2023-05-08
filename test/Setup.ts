@@ -1,4 +1,4 @@
-import userEvent from "@testing-library/user-event/index";
+import userEvent from "@testing-library/user-event";
 import { screen } from "@testing-library/react";
 
 export function getByRoleAndText(role: string, text: string) {
