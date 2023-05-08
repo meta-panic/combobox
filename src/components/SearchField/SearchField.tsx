@@ -1,7 +1,5 @@
 import React, {
     FC,
-    useEffect,
-    useState,
     memo, useCallback,
 } from "react";
 

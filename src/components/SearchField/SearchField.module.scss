@@ -16,7 +16,7 @@
   &:focus {
     outline: none;
   }
-  
+
   @include bp($bp-phone) {
     width: 100%;
   }
@@ -25,6 +25,7 @@
 .chevronIcon {
   position: absolute;
   display: inline-block;
+  pointer-events: none;
 
   vertical-align: baseline;
   width: $icon-size-s;
@@ -35,7 +36,7 @@
   top: 50%;
   fill: $color-type-icon;
   transform: translate(0, -50%);
-  
+
   @include bp($bp-phone) {
     vertical-align: baseline;
     margin-right: $space-xs;
