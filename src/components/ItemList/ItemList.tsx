@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, {useCallback, useEffect} from "react";
 
 import styles from "./ItemList.module.scss";
 import cx from "classnames";
@@ -67,6 +67,16 @@ const Item = <T extends object>({
   const onClick = useCallback(() => {
     handleItemClick(item);
   }, [item, handleItemClick]);
+  useEffect(() => {
+    if (isFocused) {
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      });
+    }
+  }, [isFocused, id]);
   return (
     <li
       role="option"

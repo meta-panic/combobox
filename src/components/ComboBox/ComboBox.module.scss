@@ -4,12 +4,13 @@ ul.list {
 }
 
 .list {
- margin: 0;
- width: 100%;
+  margin: 0;
+  width: 100%;
 }
 
 .item {
-  padding: $space-xs 0 $space-xs  $space-m;
+  padding: $space-xs 0 $space-xs $space-m;
+
   &:hover {
     background-color: $focus;
   }
@@ -21,7 +22,8 @@ ul.list {
 }
 
 .comboBoxWrapper {
-  height: 36px;
+  --height: 46px;
+  height: var(--height);
   width: fit-content;
 }
 
@@ -29,17 +31,29 @@ ul.list {
   box-sizing: border-box;
   border-radius: 7px;
   overflow: hidden;
-  border: 3px solid rgba($color: $brand, $alpha: 0.0);
-  transition: border-color 0.3s cubic-bezier(0.1, -0.6, 0.2, 0);
-  z-index: 2;
+  border: 3px solid #000;
+  background: $color-type-body;
+  transition: max-height 0.3s ease,
+              border-color 0.3s cubic-bezier(0.1, -0.6, 0.2, 0),
+              z-index 0.3s ease;
+              ;
+  position: relative;
 
   @include bp($bp-phone) {
     width: 100%;
   }
+
+
 }
 
-.contentActive {
-  border: 3px solid rgba($color: $brand, $alpha: 0.8);
-  outline: none;
-  position: relative;
+.collapsed {
+  max-height: var(--height);
+  border-color: transparentize($brand, 1.0);
+  z-index: 2;
+}
+
+.expanded {
+  max-height: 1000px;
+  border-color: transparentize($brand, 0.0);
+  z-index: 2000;
 }

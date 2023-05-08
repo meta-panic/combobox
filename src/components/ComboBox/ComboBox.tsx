@@ -58,7 +58,9 @@ const ComboBox = <T extends object>({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [focusedItemIndex, setFocusedItemIndex] = useState(0);
+  const [focusedItemIndex, setFocusedItemIndex] = useState<number | undefined>(
+    undefined
+  );
 
   const filteredItems = useMemo(() => {
     if (value === "") {
@@ -70,18 +72,23 @@ const ComboBox = <T extends object>({
   const focusPrevious = useCallback(() => {
     openPopup();
     setFocusedItemIndex(
-      (prev) => (filteredItems.length + prev - 1) % filteredItems.length || 0
+      (prev) =>
+        (filteredItems.length + (prev || 0) - 1) % filteredItems.length || 0
     );
   }, [filteredItems, openPopup]);
   const focusNext = useCallback(() => {
     openPopup();
     setFocusedItemIndex(
-      (prev) => (filteredItems.length + prev + 1) % filteredItems.length || 0
+      (prev) =>
+        (filteredItems.length + (prev || 0) + 1) % filteredItems.length || 0
     );
   }, [filteredItems, openPopup]);
 
   const onSelectOption = useCallback(() => {
     if (!isPopupVisible) {
+      return;
+    }
+    if (focusedItemIndex === undefined) {
       return;
     }
     const item = filteredItems[focusedItemIndex];
@@ -109,6 +116,11 @@ const ComboBox = <T extends object>({
     [openPopup]
   );
 
+  const focusedItem =
+    focusedItemIndex !== undefined
+      ? filteredItems[focusedItemIndex]
+      : undefined;
+
   return (
     <div
       className={cx(styles.comboBoxWrapper, isPopupVisible && styles.active)}
@@ -116,7 +128,8 @@ const ComboBox = <T extends object>({
       <div
         className={cx(
           styles.comboBoxContent,
-          isPopupVisible && styles.contentActive
+          !isPopupVisible && styles.collapsed,
+          isPopupVisible && styles.expanded
         )}
       >
         <SearchField
@@ -128,25 +141,23 @@ const ComboBox = <T extends object>({
           onSelectOption={onSelectOption}
           onClear={onClear}
           onBlur={onBlur}
-          focusedItem={filteredItems[focusedItemIndex]}
+          focusedItem={focusedItem}
           onChange={changeValue}
           isExpanded={isPopupVisible}
           controlsId={controlsId}
           inputRef={inputRef}
           getItemId={getItemId}
         />
-        {isPopupVisible && (
-          <ItemList
-            items={filteredItems}
-            handleItemClick={handleItemClick}
-            controlsId={controlsId}
-            entityType={entityType}
-            selectedItem={selectedItem}
-            focusedItem={filteredItems[focusedItemIndex]}
-            getItemId={getItemId}
-            ItemComponent={ItemComponent}
-          />
-        )}
+        <ItemList
+          items={filteredItems}
+          handleItemClick={handleItemClick}
+          controlsId={controlsId}
+          entityType={entityType}
+          selectedItem={selectedItem}
+          focusedItem={focusedItem}
+          getItemId={getItemId}
+          ItemComponent={ItemComponent}
+        />
       </div>
     </div>
   );
