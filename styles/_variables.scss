@@ -25,13 +25,13 @@
   * Spacing
   */
   $space-base: 1rem;
-  $space-xs: $space-base / 4;
-  $space-s: $space-base / 2;
+  $space-xs: calc($space-base / 4);
+  $space-s: calc($space-base / 2);
   $space-m: $space-base;
   $space-l: $space-base * 1.5;
   $space-xl: $space-base * 1.5;
 
-  
+
   /*
   * Breakpoints
   */
@@ -39,11 +39,11 @@
   $bp-tablets: "(min-width: 481px) and (max-width: 767px)";
   $bp-tablets-portrait-mode: "(min-width: 768px) and (max-width: 1024px)";
   $bp-desktop: "(min-width: 1025px)";
-  
+
   /*
   * Icon sizing
   */
-  $icon-size-base: 1rem / 16;
+  $icon-size-base: calc(1rem / 16);
   $icon-size-xs: $icon-size-base  * 8;
   $icon-size-s: $icon-size-base * 16;
   $icon-size-m: $icon-size-base * 32;
