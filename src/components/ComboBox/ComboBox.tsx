@@ -56,15 +56,17 @@ const ComboBox = ({
     }, [items, value]);
 
     const focusPrevious = useCallback(() => {
+        openPopup();
         setFocusedItemIndex(prev =>
             (filteredItems.length + prev - 1) % filteredItems.length || 0
         )
-    }, []);
+    }, [filteredItems, openPopup]);
     const focusNext = useCallback(() => {
+        openPopup();
         setFocusedItemIndex(prev =>
             (filteredItems.length + prev + 1) % filteredItems.length || 0
         )
-    }, []);
+    }, [filteredItems, openPopup]);
     const onSelectOption = useCallback(() => {
         const item = filteredItems[focusedItemIndex];
         setSelectedItem(item);
