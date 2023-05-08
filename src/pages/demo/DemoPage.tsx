@@ -5,17 +5,13 @@ import {ListItem} from "../../components/ItemList/types.ts";
 
 const DemoPage = () => {
     const [selectedItem, setSelectedItem] = useState<ListItem | undefined>(undefined);
-    return (
-        <>
-            <ComboBox
-                searchPlaceholder="Choose a Fruit:"
-                items={FRUIT_LIST}
-                selectedItem={selectedItem}
-                onChange={setSelectedItem}
-                entityType={"Fruits"}
-            />
-        </>
-    );
+    return <ComboBox
+        searchPlaceholder="Choose a Fruit:"
+        items={FRUIT_LIST}
+        selectedItem={selectedItem}
+        onChange={setSelectedItem}
+        entityType={"Fruits"}
+    />
 };
 
 export default DemoPage;

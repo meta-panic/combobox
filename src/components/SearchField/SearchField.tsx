@@ -7,6 +7,7 @@ import ChevronIcon from "../../assets/icons/Chevron.tsx";
 
 import styles from "./SearchField.module.scss";
 import {ListItem} from "../ItemList/types.ts";
+import cx from "classnames";
 
 interface SearchFieldProps {
     placeholder: string,
@@ -64,7 +65,11 @@ const SearchField: FC<SearchFieldProps> = memo(
             <div className={styles.inputFieldWrapper}>
                 <input
                     ref={inputRef}
-                    className={styles.inputField}
+                    className={cx(
+                        styles.inputField,
+                        isExpanded && styles.inputFieldOpened,
+                        !isExpanded && styles.inputFieldClosed,
+                    )}
                     type="text"
                     value={text}
                     placeholder={placeholder}

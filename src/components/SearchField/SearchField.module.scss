@@ -6,8 +6,8 @@
 .inputField {
   line-height: 2rem;
   width: 200px;
-
   border: 0;
+  border-radius: 5px;
 
   &:not(:focus) {
     background: $focus;
@@ -20,6 +20,10 @@
   @include bp($bp-phone) {
     width: 100%;
   }
+}
+
+.inputFieldClosed:focus {
+  background: $focus;
 }
 
 .chevronIcon {

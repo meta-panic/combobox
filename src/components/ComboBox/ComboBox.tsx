@@ -1,4 +1,4 @@
-import {HTMLAttributes, useState, useCallback, useId, useMemo, useEffect, useRef} from "react";
+import {useState, useCallback, useMemo, useRef} from "react";
 import SearchField from "../SearchField/SearchField.tsx";
 import {ListItem} from "../ItemList/types.ts";
 import ItemList from "../ItemList/ItemList.tsx";

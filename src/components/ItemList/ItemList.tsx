@@ -1,7 +1,7 @@
 import React, {
     FC,
     HTMLAttributes,
-    memo, Ref, useCallback, useEffect, useRef,
+    memo, useCallback,
 } from "react";
 import {ListItem} from "./types.ts";
 
