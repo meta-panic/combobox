@@ -41,7 +41,7 @@ const ComboBox = ({
         (item: ListItem["name"]) => {
             setValue(item);
             setPopupVisibility(false);
-            requestIdleCallback(() => {
+            setTimeout(() => {
                 inputRef.current?.focus();
                 closePopup();
             });
