@@ -6,7 +6,7 @@ ul.list {
 
 .list {
   margin: 0;
-  max-height: 200px;
+  max-height: $scrollbar-content-max-height;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -20,6 +20,7 @@ ul.list {
   background: $color-type-body;
   font-size: 10px;
   font-weight: 600;
+
   &:hover {
     background-color: $focus;
   }

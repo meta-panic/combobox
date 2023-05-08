@@ -21,9 +21,10 @@ ul.list {
   padding-right: $space-xs;
 }
 
+$combo-box-height: 46px;
+
 .comboBoxWrapper {
-  --height: 46px;
-  height: var(--height);
+  height: $combo-box-height;
   width: fit-content;
 }
 
@@ -34,9 +35,8 @@ ul.list {
   border: 3px solid #000;
   background: $color-type-body;
   transition: max-height 0.3s ease,
-              border-color 0.3s cubic-bezier(0.1, -0.6, 0.2, 0),
-              z-index 0.3s ease;
-              ;
+  border-color 0.3s cubic-bezier(0.1, -0.6, 0.2, 0),
+  z-index 0.3s ease;;
   position: relative;
 
   @include bp($bp-phone) {
@@ -47,13 +47,13 @@ ul.list {
 }
 
 .collapsed {
-  max-height: var(--height);
+  max-height: $combo-box-height;
   border-color: transparentize($brand, 1.0);
   z-index: 2;
 }
 
 .expanded {
-  max-height: 1000px;
+  max-height: calc($scrollbar-content-max-height + $combo-box-height);
   border-color: transparentize($brand, 0.0);
   z-index: 2000;
 }
