@@ -1,4 +1,4 @@
-import {HTMLAttributes, useState, useCallback, useId} from "react";
+import {HTMLAttributes, useState, useCallback, useId, useMemo} from "react";
 import SearchField from "../SearchField/SearchField.tsx";
 import {ListItem} from "../ItemList/types.ts";
 import ItemList from "../ItemList/ItemList.tsx";
@@ -6,7 +6,7 @@ import ItemList from "../ItemList/ItemList.tsx";
 import cx from "classnames";
 import styles from "./ComboBox.module.scss";
 
-interface ComboBoxProps extends HTMLAttributes<HTMLDataListElement> {
+interface ComboBoxProps {
     searchPlaceholder?: string,
     items: ListItem[],
     entityType: string,
@@ -28,23 +28,27 @@ const ComboBox = ({
         [setPopupVisibility]
     );
 
-    const [selectedItem, setItem] = useState<ListItem["name"]>();
-
-
     const handleItemClick = useCallback(
-        (item: ListItem["name"]) => (e: React.SyntheticEvent) => {
-            setItem(item);
+        (item: ListItem["name"]) => {
+            closePopup();
             setPopupVisibility(false);
         },
-        []
+        [closePopup]
     );
-
-    const handleKeyDown = useCallback((e: React.SyntheticEvent) => {
-    }, []);
 
     const controlsId = useId();
 
+    const [selectedItem, setSelectedItem] = useState<
+        ListItem | undefined
+    >(undefined);
     const [value, setValue] = useState("");
+
+    const filteredItems = useMemo(() => {
+        if (value === "") {
+            return items;
+        }
+        return items.filter(item => item.name.includes(value));
+    }, [items, value]);
 
     return (
         <div
@@ -64,11 +68,12 @@ const ComboBox = ({
             />
             {isPopupVisible && (
                 <ItemList
-                    items={items}
+                    items={filteredItems}
                     handleItemClick={handleItemClick}
-                    handleKeyDown={handleKeyDown}
                     controlsId={controlsId}
                     entityType={entityType}
+                    selectedItem={selectedItem}
+                    fakeFocusedItem={undefined}
                 />
             )}
         </div>
