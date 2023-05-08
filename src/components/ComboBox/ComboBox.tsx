@@ -1,4 +1,4 @@
-import {HTMLAttributes, useState, useCallback, useId, useMemo} from "react";
+import {HTMLAttributes, useState, useCallback, useId, useMemo, useEffect} from "react";
 import SearchField from "../SearchField/SearchField.tsx";
 import {ListItem} from "../ItemList/types.ts";
 import ItemList from "../ItemList/ItemList.tsx";
@@ -7,8 +7,10 @@ import cx from "classnames";
 import styles from "./ComboBox.module.scss";
 
 interface ComboBoxProps {
-    searchPlaceholder?: string,
+    searchPlaceholder: string,
     items: ListItem[],
+    selectedItem: ListItem | undefined,
+    onChange: (value: ListItem | undefined) => void,
     entityType: string,
 }
 
@@ -16,6 +18,8 @@ const ComboBox = ({
                       searchPlaceholder = "Start typing",
                       items,
                       entityType,
+                      selectedItem,
+                      onChange,
                   }: ComboBoxProps) => {
     const [isPopupVisible, setPopupVisibility] = useState(false);
 
@@ -37,16 +41,12 @@ const ComboBox = ({
     );
 
     const controlsId = useId();
+    const [value, setValue] = useState("");
 
-    const [selectedItem, setSelectedItem] = useState<
-        ListItem | undefined
-    >(undefined);
     const [
         focusedItemIndex,
         setFocusedItemIndex
     ] = useState(0);
-
-    const [value, setValue] = useState("");
 
     const filteredItems = useMemo(() => {
         if (value === "") {
@@ -69,16 +69,16 @@ const ComboBox = ({
     }, [filteredItems, openPopup]);
     const onSelectOption = useCallback(() => {
         const item = filteredItems[focusedItemIndex];
-        setSelectedItem(item);
+        onChange(item);
         setValue(item?.name || "");
         closePopup();
-    }, [filteredItems, focusedItemIndex, closePopup]);
+    }, [onChange, filteredItems, focusedItemIndex, closePopup]);
 
     const onClear = useCallback(() => {
-        setSelectedItem(undefined);
+        onChange(undefined);
         setValue("");
         closePopup();
-    }, [closePopup]);
+    }, [onChange, closePopup]);
 
     const onBlur = useCallback(() => {
         closePopup();
