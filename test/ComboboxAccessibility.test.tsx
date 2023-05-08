@@ -93,9 +93,9 @@ test("Enter on option accepts value and closes popup", async () => {
   expect(combobox).toHaveAttribute("aria-expanded", "true");
 
   await user.keyboard("{Enter}");
+
   expect(getByRoleAndText("option","Apple")).toHaveAttribute("aria-selected", "true");
   expect(combobox).toHaveDisplayValue("Apple");
   expect(combobox).toHaveAttribute("aria-expanded", "false");
-
 
 });
