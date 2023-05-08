@@ -1,4 +1,4 @@
-import {HTMLAttributes, useState, useCallback, useId, useMemo, useEffect} from "react";
+import {HTMLAttributes, useState, useCallback, useId, useMemo, useEffect, useRef} from "react";
 import SearchField from "../SearchField/SearchField.tsx";
 import {ListItem} from "../ItemList/types.ts";
 import ItemList from "../ItemList/ItemList.tsx";
@@ -34,17 +34,22 @@ const ComboBox = ({
     );
 
     const controlsId = generateId();
-    console.log("controlsId: " + controlsId);
+
     const [value, setValue] = useState("");
 
     const handleItemClick = useCallback(
         (item: ListItem["name"]) => {
-            closePopup();
             setValue(item);
             setPopupVisibility(false);
+            requestIdleCallback(() => {
+                inputRef.current?.focus();
+                closePopup();
+            });
         },
         [closePopup]
     );
+
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [
         focusedItemIndex,
@@ -113,6 +118,7 @@ const ComboBox = ({
                 onChange={changeValue}
                 isExpanded={isPopupVisible}
                 controlsId={controlsId}
+                inputRef={inputRef}
             />
             {isPopupVisible && (
                 <ItemList

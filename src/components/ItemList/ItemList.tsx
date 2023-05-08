@@ -1,7 +1,7 @@
 import React, {
     FC,
     HTMLAttributes,
-    memo, useCallback,
+    memo, Ref, useCallback, useEffect, useRef,
 } from "react";
 import {ListItem} from "./types.ts";
 
@@ -69,8 +69,9 @@ const Item: FC<ItemProps> = ({
         handleItemClick(name)
     }, [name, handleItemClick]);
     return <li
-        onClick={onClick}
         role="option"
+        onMouseDown={e => e.preventDefault()}
+        onClick={onClick}
         className={
             cx(
                 styles.item,

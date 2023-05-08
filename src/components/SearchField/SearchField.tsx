@@ -1,6 +1,6 @@
 import React, {
     FC,
-    memo, useCallback,
+    memo, Ref, useCallback,
 } from "react";
 
 import ChevronIcon from "../../assets/icons/Chevron.tsx";
@@ -21,6 +21,7 @@ interface SearchFieldProps {
     onClear: () => void,
     onBlur: () => void,
     selectedItem: ListItem | undefined,
+    inputRef: Ref<HTMLInputElement>,
 }
 
 const SearchField: FC<SearchFieldProps> = memo(
@@ -37,6 +38,7 @@ const SearchField: FC<SearchFieldProps> = memo(
          isExpanded,
          controlsId,
          selectedItem,
+         inputRef,
      }) => {
 
         const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +63,7 @@ const SearchField: FC<SearchFieldProps> = memo(
         return (
             <div className={styles.inputFieldWrapper}>
                 <input
+                    ref={inputRef}
                     className={styles.inputField}
                     type="text"
                     value={text}

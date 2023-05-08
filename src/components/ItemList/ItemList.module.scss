@@ -13,6 +13,7 @@ ul.list {
 }
 
 .item {
+  cursor: pointer;
   padding: $space-xs 0 $space-xs $space-m;
 
   &:hover {
