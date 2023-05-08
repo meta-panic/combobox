@@ -1,5 +1,5 @@
-import ComboBox from "../../molecules/ComboBox/ComboBox";
-import { FRUIT_LIST } from "./consts";
+import ComboBox from "../../components/ComboBox/ComboBox.tsx";
+import { FRUIT_LIST } from "./consts.ts";
 
 const DemoPage = () => {
   return (

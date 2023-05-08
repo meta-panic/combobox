@@ -1,4 +1,4 @@
-import { DemoPage } from "./components/pages";
+import { DemoPage } from "./pages";
 
 function App() {
   return <DemoPage />;

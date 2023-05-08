@@ -1,4 +1,4 @@
-import { Fruit } from "./types";
+import { Fruit } from "./types.ts";
 
 export const FRUIT_LIST: Fruit[] = [
   { name: "Apple", emoji: "🍎" },
