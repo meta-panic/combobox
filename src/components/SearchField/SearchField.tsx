@@ -1,52 +1,47 @@
 import React, {
-    ChangeEventHandler,
     FC,
-    FocusEventHandler,
-    InputHTMLAttributes,
     useEffect,
     useState,
-    memo,
+    memo, useCallback,
 } from "react";
 
 import ChevronIcon from "../../assets/icons/Chevron.tsx";
 
 import styles from "./SearchField.module.scss";
 
-interface SearchFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-    placeholder?: string;
-    text?: string;
+interface SearchFieldProps {
+    placeholder: string,
+    text: string,
     isExpanded: boolean,
     controlsId: string,
-    onChange?: ChangeEventHandler<HTMLInputElement>;
-    onFocus?: FocusEventHandler<HTMLInputElement>;
-    onBlur?: FocusEventHandler<HTMLInputElement>;
+    onChange: (value: string) => void,
+    onFocus: () => void,
+    onBlur: () => void,
 }
 
 const SearchField: FC<SearchFieldProps> = memo(
     ({
-         placeholder = undefined,
-         text = undefined,
+         placeholder,
+         text,
          onChange,
          onBlur,
          onFocus,
          isExpanded,
          controlsId,
      }) => {
-        const [value, setValue] = useState<string | undefined>();
 
-        useEffect(() => {
-            if (text) {
-                setValue(text);
-            }
-        }, [text]);
+        const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange(e.target.value);
+        }, [onChange]);
+
         return (
             <div className={styles.inputFieldWrapper}>
                 <input
                     className={styles.inputField}
                     type="text"
-                    value={value}
+                    value={text}
                     placeholder={placeholder}
-                    onChange={onChange}
+                    onChange={handleChange}
                     onBlur={onBlur}
                     onFocus={onFocus}
                     role="combobox"

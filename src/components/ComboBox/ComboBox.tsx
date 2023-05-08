@@ -44,6 +44,8 @@ const ComboBox = ({
 
     const controlsId = useId();
 
+    const [value, setValue] = useState("");
+
     return (
         <div
             className={cx(styles.comboBoxWrapper, {
@@ -53,7 +55,10 @@ const ComboBox = ({
             <SearchField
                 placeholder={searchPlaceholder}
                 onFocus={openPopup}
-                text={selectedItem}
+                text={value}
+                onBlur={() => {
+                }}
+                onChange={setValue}
                 isExpanded={isPopupVisible}
                 controlsId={controlsId}
             />
