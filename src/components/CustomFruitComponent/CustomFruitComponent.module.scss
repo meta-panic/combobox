@@ -1,0 +1,26 @@
+.custom {
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.emojiWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 128px;
+}
+
+.text {
+  position: absolute;
+  font-size: 24px;
+  text-shadow: 0 0 4px #000;
+  left: calc(var(--idx) * 4px);
+  top: calc(var(--idx) * 4px);
+  color: hsl(
+                  calc(var(--idx) * 20),
+                  100%,
+                  50%
+  );
+}
+
