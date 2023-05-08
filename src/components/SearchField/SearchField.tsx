@@ -20,6 +20,7 @@ interface SearchFieldProps {
     onSelectPreviousOption: () => void,
     onSelectNextOption: () => void,
     onSelectOption: () => void,
+    onClear: () => void,
     selectedItem: ListItem | undefined,
 }
 
@@ -32,6 +33,7 @@ const SearchField: FC<SearchFieldProps> = memo(
          onSelectNextOption,
          onSelectOption,
          onFocus,
+         onClear,
          isExpanded,
          controlsId,
          selectedItem,
@@ -47,11 +49,14 @@ const SearchField: FC<SearchFieldProps> = memo(
                 onSelectNextOption();
             } else if (e.key === "Enter") {
                 onSelectOption();
+            } else if (e.key === "Escape") {
+                onClear();
             }
         }, [
             onSelectPreviousOption,
             onSelectNextOption,
             onSelectOption,
+            onClear,
         ]);
         return (
             <div className={styles.inputFieldWrapper}>
