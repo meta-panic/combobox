@@ -1,10 +1,10 @@
-import { getByText, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import userEvent from "@testing-library/user-event";
-import  DemoPage  from "../src/pages/demo/DemoPage";
+import DemoPage from "../src/pages/demo/DemoPage";
+import { setupTests } from "./Setup";
 
-const user = userEvent.setup();
+const { user, getByRoleAndText } = setupTests();
 
 test("Combobox is focusable", async () => {
   render(<DemoPage />);
@@ -24,7 +24,6 @@ test("Combobox down arrow opens popup ", async () => {
   await user.keyboard("{ArrowDown}");
   expect(combobox).toHaveFocus();
   expect(screen.getByText("Apple")).toBeVisible();
-
 });
 
 test("Down arrow on combobox opens popup ", async () => {
@@ -37,7 +36,6 @@ test("Down arrow on combobox opens popup ", async () => {
   await user.keyboard("{ArrowDown}");
   expect(combobox).toHaveFocus();
   expect(screen.getByText("Apple")).toBeVisible();
-
 });
 test("Escape when popup is open: closes popup, focus remains on combobox", async () => {
   render(<DemoPage />);
@@ -51,5 +49,4 @@ test("Escape when popup is open: closes popup, focus remains on combobox", async
   await user.keyboard("{Escape}");
   expect(screen.queryByText("Apple")).toBeNull();
   expect(combobox).toHaveFocus();
-
 });

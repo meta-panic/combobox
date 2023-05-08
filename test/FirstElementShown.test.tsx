@@ -1,15 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import userEvent from "@testing-library/user-event";
 import DemoPage from "../src/pages/demo/DemoPage";
+import {setupTests} from "./Setup";
 
-const user = userEvent.setup();
-
-function getByRoleAndText(role: string, text: string) {
-  return screen.getAllByRole(role).find((e) => e.textContent?.includes(text));
-}
-
-window.HTMLElement.prototype.scrollIntoView = jest.fn();
+const { user, getByRoleAndText } = setupTests();
 
 test("Loads and displays placeholder", async () => {
   render(<DemoPage />);
