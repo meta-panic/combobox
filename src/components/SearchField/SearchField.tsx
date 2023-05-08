@@ -10,7 +10,7 @@ import React, {
 
 import ChevronIcon from "../../assets/icons/Chevron.tsx";
 
-import styles from "./Input.module.scss";
+import styles from "./SearchField.module.scss";
 
 interface SearchFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     placeholder?: string;
