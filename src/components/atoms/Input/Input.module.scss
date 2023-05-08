@@ -1,0 +1,47 @@
+.inputFieldWrapper {
+  height: max-content;
+  position: relative;
+}
+
+.inputField {
+  line-height: 2rem;
+  width: 200px;
+
+  border: 0;
+
+  &:not(:focus) {
+    background: $focus;
+  }
+
+  &:focus {
+    outline: none;
+  }
+  
+  @include bp($bp-phone) {
+    width: 100%;
+  }
+}
+
+.chevronIcon {
+  position: absolute;
+  display: inline-block;
+
+  vertical-align: baseline;
+  width: $icon-size-s;
+  height: $icon-size-s;
+
+  margin: auto;
+  right: $space-s;
+  top: 50%;
+  fill: $color-type-icon;
+  transform: translate(0, -50%);
+  
+  @include bp($bp-phone) {
+    vertical-align: baseline;
+    margin-right: $space-xs;
+    height: 100%;
+    right: 0;
+    top: 0;
+    transform: none;
+  }
+}

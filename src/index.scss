@@ -1,0 +1,13 @@
+@import '../styles/utils';
+@import '../styles/variables';
+@import '../node_modules/css-reset-and-normalize/scss/reset-and-normalize';
+
+html,
+body, input {
+  background-color: $color-type-body;
+  color: $color-type-font;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  line-height: $base-font-lineheight;
+}
+

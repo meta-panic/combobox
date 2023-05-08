@@ -1,0 +1,16 @@
+@import "./variables";
+
+@mixin bp($point) {
+  @if $point == $bp-phone {
+    @media ($point) { @content; }
+  }
+  @else if $point == $bp-tablets {
+    @media ($point) { @content; }
+  }
+  @else if $point == $bp-tablets-portrait-mode {
+    @media ($point)  { @content; }
+  }
+  @else if $point == $bp-desktop {
+    @media ($point)  { @content; }
+  }
+}

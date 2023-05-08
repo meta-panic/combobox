@@ -1,0 +1,51 @@
+  /*
+  * Colors
+  */
+  $grey-1: #474747;
+  $grey-2: #706e6e;
+  $grey-3: #aaa9a9;
+  $grey-4: #ededed;
+
+  $brand: #6b9bf4;
+  $focus: #e8ecef;
+
+  $color-type-body: #fff;
+  $color-type-font: $grey-1;
+  $color-type-font-hint: red;
+  $color-type-icon: $grey-2;
+
+
+  /*
+  * Fonts
+  */
+  $base-font-family: sans-serif;
+  $base-font-lineheight: 1.5em;
+
+  /*
+  * Spacing
+  */
+  $space-base: 1rem;
+  $space-xs: $space-base / 4;
+  $space-s: $space-base / 2;
+  $space-m: $space-base;
+  $space-l: $space-base * 1.5;
+  $space-xl: $space-base * 1.5;
+
+  
+  /*
+  * Breakpoints
+  */
+  $bp-phone: "(max-width: 480px)";
+  $bp-tablets: "(min-width: 481px) and (max-width: 767px)";
+  $bp-tablets-portrait-mode: "(min-width: 768px) and (max-width: 1024px)";
+  $bp-desktop: "(min-width: 1025px)";
+  
+  /*
+  * Icon sizing
+  */
+  $icon-size-base: 1rem / 16;
+  $icon-size-xs: $icon-size-base  * 8;
+  $icon-size-s: $icon-size-base * 16;
+  $icon-size-m: $icon-size-base * 32;
+  $icon-size-l: $icon-size-base * 64;
+  $icon-size-xl: $icon-size-base * 128;
