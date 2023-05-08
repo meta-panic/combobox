@@ -7,7 +7,7 @@ import cx from "classnames";
 import styles from "./ComboBox.module.scss";
 import {generateId} from "../../utils/generateId.ts";
 
-interface ComboBoxProps {
+export interface ComboBoxProps {
     searchPlaceholder: string,
     items: ListItem[],
     selectedItem: ListItem | undefined,

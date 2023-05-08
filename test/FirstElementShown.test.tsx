@@ -15,7 +15,7 @@ test("Loads and displays placeholder", async () => {
 test("Displays items after click on input ", async () => {
   render(<App />);
   const user = userEvent.setup();
-  user.click(screen.getByPlaceholderText("Choose a Fruit:")) ;
+  await user.click(screen.getByPlaceholderText("Choose a Fruit:")) ;
   expect(getByRoleAndText("option", "Apple")).toBeVisible();
   expect(getByRoleAndText("option", "Banana")).toBeVisible();
   expect(getByRoleAndText("option", "Pear")).toBeVisible();
@@ -26,8 +26,9 @@ test("Displays items after click on input ", async () => {
 test("Does not display items after click on item ", async () => {
   render(<App />);
   const user = userEvent.setup();
-  user.click(screen.getByPlaceholderText("Choose a Fruit:"));
-  user.click(screen.getByText("Apple"));
+  await user.click(screen.getByPlaceholderText("Choose a Fruit:"));
+  expect(getByRoleAndText("option", "Apple")).toBeVisible();
+  await user.click(screen.getByText("Apple"));
   expect(screen.queryByText("Apple")).toBeNull();
   expect(screen.queryByText("Banana")).toBeNull();
   expect(screen.queryByText("Pear")).toBeNull();
