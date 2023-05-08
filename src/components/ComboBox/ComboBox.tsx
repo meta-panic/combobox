@@ -41,6 +41,11 @@ const ComboBox = ({
     const [selectedItem, setSelectedItem] = useState<
         ListItem | undefined
     >(undefined);
+    const [
+        focusedItemIndex,
+        setFocusedItemIndex
+    ] = useState(0);
+
     const [value, setValue] = useState("");
 
     const filteredItems = useMemo(() => {
@@ -49,6 +54,22 @@ const ComboBox = ({
         }
         return items.filter(item => item.name.includes(value));
     }, [items, value]);
+
+    const focusPrevious = useCallback(() => {
+        setFocusedItemIndex(prev =>
+            (filteredItems.length + prev - 1) % filteredItems.length || 0
+        )
+    }, []);
+    const focusNext = useCallback(() => {
+        setFocusedItemIndex(prev =>
+            (filteredItems.length + prev + 1) % filteredItems.length || 0
+        )
+    }, []);
+
+    const changeValue = useCallback((v: string) => {
+        setFocusedItemIndex(0);
+        setValue(v);
+    }, []);
 
     return (
         <div
@@ -60,9 +81,10 @@ const ComboBox = ({
                 placeholder={searchPlaceholder}
                 onFocus={openPopup}
                 text={value}
-                onBlur={() => {
-                }}
-                onChange={setValue}
+                onSelectPreviousOption={focusPrevious}
+                onSelectNextOption={focusNext}
+                selectedItem={selectedItem}
+                onChange={changeValue}
                 isExpanded={isPopupVisible}
                 controlsId={controlsId}
             />
@@ -73,7 +95,7 @@ const ComboBox = ({
                     controlsId={controlsId}
                     entityType={entityType}
                     selectedItem={selectedItem}
-                    fakeFocusedItem={undefined}
+                    focusedItem={filteredItems[focusedItemIndex]}
                 />
             )}
         </div>

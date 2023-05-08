@@ -8,6 +8,7 @@ import React, {
 import ChevronIcon from "../../assets/icons/Chevron.tsx";
 
 import styles from "./SearchField.module.scss";
+import {ListItem} from "../ItemList/types.ts";
 
 interface SearchFieldProps {
     placeholder: string,
@@ -16,7 +17,9 @@ interface SearchFieldProps {
     controlsId: string,
     onChange: (value: string) => void,
     onFocus: () => void,
-    onBlur: () => void,
+    onSelectPreviousOption: () => void,
+    onSelectNextOption: () => void,
+    selectedItem: ListItem | undefined,
 }
 
 const SearchField: FC<SearchFieldProps> = memo(
@@ -24,16 +27,27 @@ const SearchField: FC<SearchFieldProps> = memo(
          placeholder,
          text,
          onChange,
-         onBlur,
+         onSelectPreviousOption,
+         onSelectNextOption,
          onFocus,
          isExpanded,
          controlsId,
+         selectedItem,
      }) => {
 
         const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
             onChange(e.target.value);
         }, [onChange]);
-        const focusedLiElementId = "option-1"; //FOCUSED element id not selected one use empty string if nothing in list is focused
+        const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "ArrowUp") {
+                onSelectPreviousOption();
+            } else if (e.key === "ArrowDown") {
+                onSelectNextOption();
+            }
+        }, [
+            onSelectPreviousOption,
+            onSelectNextOption,
+        ]);
         return (
             <div className={styles.inputFieldWrapper}>
                 <input
@@ -42,13 +56,13 @@ const SearchField: FC<SearchFieldProps> = memo(
                     value={text}
                     placeholder={placeholder}
                     onChange={handleChange}
-                    onBlur={onBlur}
+                    onKeyDown={handleKeyDown}
                     onFocus={onFocus}
                     role="combobox"
                     aria-expanded={isExpanded}
                     aria-controls={controlsId}
                     aria-autocomplete={"list"}
-                    aria-activedescendant={focusedLiElementId}
+                    aria-activedescendant={selectedItem ? (controlsId + ":" + selectedItem.name) : ""}
                 />
                 <ChevronIcon className={styles.chevronIcon}/>
             </div>

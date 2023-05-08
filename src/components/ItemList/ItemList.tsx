@@ -6,10 +6,11 @@ import React, {
 import {ListItem} from "./types.ts";
 
 import styles from "./ItemList.module.scss";
+import cx from "classnames";
 
 interface ItemListProps extends HTMLAttributes<HTMLUListElement> {
     items: ListItem[],
-    fakeFocusedItem: ListItem | undefined,
+    focusedItem: ListItem | undefined,
     selectedItem: ListItem | undefined,
     handleItemClick: (item: ListItem["name"]) => void,
     controlsId: string,
@@ -22,7 +23,7 @@ const ItemList: FC<ItemListProps> = memo(
          handleItemClick,
          controlsId,
          entityType,
-         fakeFocusedItem,
+         focusedItem,
          selectedItem,
      }) => {
         return (
@@ -39,6 +40,7 @@ const ItemList: FC<ItemListProps> = memo(
                         item={item}
                         handleItemClick={handleItemClick}
                         isSelected={selectedItem === item}
+                        isFocused={item === focusedItem}
                     />
                 ))}
             </ul>
@@ -50,6 +52,7 @@ const ItemList: FC<ItemListProps> = memo(
 interface ItemProps {
     id: string,
     isSelected: boolean,
+    isFocused: boolean,
     item: ListItem,
     handleItemClick: (item: ListItem["name"]) => void,
 }
@@ -59,21 +62,27 @@ const Item: FC<ItemProps> = ({
                                  handleItemClick,
                                  id,
                                  isSelected,
+                                 isFocused,
                              }) => {
     const name = item.name;
     const onClick = useCallback(() => {
         handleItemClick(name)
     }, [name, handleItemClick]);
     return <li
-        tabIndex={0}
         onClick={onClick}
         role="option"
-        className={styles.item}
+        className={
+            cx(
+                styles.item,
+                isFocused && styles.focused
+            )}
         aria-selected={isSelected}
         id={id}
     >
         {item?.emoji && (
-            <div className={styles.emojiWrapper}>{item.emoji}</div>
+            <div
+                className={styles.emojiWrapper}
+            >{item.emoji}</div>
         )}
         {item.name}
     </li>

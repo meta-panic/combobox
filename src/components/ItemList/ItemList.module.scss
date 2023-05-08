@@ -2,20 +2,26 @@ ul.list {
   margin: 0;
   padding: 0;
 }
-.list {
- margin: 0;
- width: 200px;
 
- @include bp($bp-phone) {
-   width: 100%;
- }
+.list {
+  margin: 0;
+  width: 200px;
+
+  @include bp($bp-phone) {
+    width: 100%;
+  }
 }
 
 .item {
-  padding: $space-xs 0 $space-xs  $space-m;
+  padding: $space-xs 0 $space-xs $space-m;
+
   &:hover {
     background-color: $focus;
   }
+}
+
+.focused {
+  background-color: $focus;
 }
 
 .emojiWrapper {
