@@ -47,6 +47,7 @@ const SearchField: FC<SearchFieldProps> = memo(
                     role="combobox"
                     aria-expanded={isExpanded}
                     aria-controls={controlsId}
+                    aria-autocomplete={"list"}
                 />
                 <ChevronIcon className={styles.chevronIcon}/>
             </div>

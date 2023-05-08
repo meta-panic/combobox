@@ -30,6 +30,7 @@ const ItemList: FC<ItemListProps> = memo(
                 className={styles.list}
                 id={controlsId}
                 aria-label={entityType}
+                role="listbox"
             >
                 {items?.map((item) => (
                     <li
