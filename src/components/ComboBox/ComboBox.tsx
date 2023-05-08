@@ -5,6 +5,7 @@ import ItemList from "../ItemList/ItemList.tsx";
 
 import cx from "classnames";
 import styles from "./ComboBox.module.scss";
+import {generateId} from "../../utils/generateId.ts";
 
 interface ComboBoxProps {
     searchPlaceholder: string,
@@ -32,16 +33,18 @@ const ComboBox = ({
         [setPopupVisibility]
     );
 
+    const controlsId = generateId();
+    console.log("controlsId: " + controlsId);
+    const [value, setValue] = useState("");
+
     const handleItemClick = useCallback(
         (item: ListItem["name"]) => {
             closePopup();
+            setValue(item);
             setPopupVisibility(false);
         },
         [closePopup]
     );
-
-    const controlsId = useId();
-    const [value, setValue] = useState("");
 
     const [
         focusedItemIndex,
