@@ -107,34 +107,36 @@ const ComboBox = <T extends object>({
     <div
       className={cx(styles.comboBoxWrapper, isPopupVisible && styles.active)}
     >
-      <SearchField
-        placeholder={searchPlaceholder}
-        onFocus={openPopup}
-        text={value}
-        onSelectPreviousOption={focusPrevious}
-        onSelectNextOption={focusNext}
-        onSelectOption={onSelectOption}
-        onClear={onClear}
-        onBlur={onBlur}
-        selectedItem={selectedItem}
-        onChange={changeValue}
-        isExpanded={isPopupVisible}
-        controlsId={controlsId}
-        inputRef={inputRef}
-        getItemId={getItemId}
-      />
-      {isPopupVisible && (
-        <ItemList
-          items={filteredItems}
-          handleItemClick={handleItemClick}
-          controlsId={controlsId}
-          entityType={entityType}
+      <div className={cx(styles.comboBoxContent, isPopupVisible && styles.contentActive)}>
+        <SearchField
+          placeholder={searchPlaceholder}
+          onFocus={openPopup}
+          text={value}
+          onSelectPreviousOption={focusPrevious}
+          onSelectNextOption={focusNext}
+          onSelectOption={onSelectOption}
+          onClear={onClear}
+          onBlur={onBlur}
           selectedItem={selectedItem}
-          focusedItem={filteredItems[focusedItemIndex]}
+          onChange={changeValue}
+          isExpanded={isPopupVisible}
+          controlsId={controlsId}
+          inputRef={inputRef}
           getItemId={getItemId}
-          ItemComponent={ItemComponent}
         />
-      )}
+        {isPopupVisible && (
+          <ItemList
+            items={filteredItems}
+            handleItemClick={handleItemClick}
+            controlsId={controlsId}
+            entityType={entityType}
+            selectedItem={selectedItem}
+            focusedItem={filteredItems[focusedItemIndex]}
+            getItemId={getItemId}
+            ItemComponent={ItemComponent}
+          />
+        )}
+      </div>
     </div>
   );
 };
