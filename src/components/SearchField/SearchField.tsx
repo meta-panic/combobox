@@ -74,6 +74,7 @@ const SearchFieldComponent = <T extends object>({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         onFocus={onFocus}
+        onClick={onFocus}
         onBlur={onBlur}
         role="combobox"
         aria-expanded={isExpanded}
