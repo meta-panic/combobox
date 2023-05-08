@@ -27,15 +27,15 @@ const ComboBox = <T extends object>({
   onChange,
   ItemComponent,
 }: ComboBoxProps<T>) => {
-  const [isPopupVisible, setPopupVisibility] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const closePopup = useCallback(
-    () => setPopupVisibility(false),
-    [setPopupVisibility]
+    () => setIsPopupVisible(false),
+    [setIsPopupVisible]
   );
   const openPopup = useCallback(
-    () => setPopupVisibility(true),
-    [setPopupVisibility]
+    () => setIsPopupVisible(true),
+    [setIsPopupVisible]
   );
 
   const controlsId = useMemo(() => {
@@ -47,13 +47,13 @@ const ComboBox = <T extends object>({
   const handleItemClick = useCallback(
     (item: T) => {
       setValue(getItemTitle(item));
-      setPopupVisibility(false);
+      setIsPopupVisible(false);
       setTimeout(() => {
         inputRef.current?.focus();
         closePopup();
       });
     },
-    [closePopup, getItemTitle]
+    [isPopupVisible, closePopup, getItemTitle]
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -79,12 +79,16 @@ const ComboBox = <T extends object>({
       (prev) => (filteredItems.length + prev + 1) % filteredItems.length || 0
     );
   }, [filteredItems, openPopup]);
+
   const onSelectOption = useCallback(() => {
+    if (!isPopupVisible) {
+      return;
+    }
     const item = filteredItems[focusedItemIndex];
     onChange(item);
     setValue(item ? getItemTitle(item) : "");
     closePopup();
-  }, [onChange, filteredItems, focusedItemIndex, closePopup]);
+  }, [isPopupVisible, onChange, filteredItems, focusedItemIndex, closePopup]);
 
   const onClear = useCallback(() => {
     onChange(undefined);
