@@ -65,6 +65,12 @@ const ComboBox = ({
             (filteredItems.length + prev + 1) % filteredItems.length || 0
         )
     }, []);
+    const onSelectOption = useCallback(() => {
+        const item = filteredItems[focusedItemIndex];
+        setSelectedItem(item);
+        setValue(item.name);
+        closePopup();
+    }, [filteredItems, focusedItemIndex, closePopup]);
 
     const changeValue = useCallback((v: string) => {
         setFocusedItemIndex(0);
@@ -83,6 +89,7 @@ const ComboBox = ({
                 text={value}
                 onSelectPreviousOption={focusPrevious}
                 onSelectNextOption={focusNext}
+                onSelectOption={onSelectOption}
                 selectedItem={selectedItem}
                 onChange={changeValue}
                 isExpanded={isPopupVisible}
