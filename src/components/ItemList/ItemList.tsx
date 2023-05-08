@@ -25,6 +25,7 @@ const ItemList: FC<ItemListProps> = memo(
          controlsId,
          entityType,
      }) => {
+      const isSelected = false
         return (
             <ul
                 className={styles.list}
@@ -39,7 +40,9 @@ const ItemList: FC<ItemListProps> = memo(
                         onClick={handleItemClick(item.name)}
                         onKeyDown={handleKeyDown}
                         role="option"
+                        aria-selected={isSelected}
                         className={styles.item}
+                        id={"option-1"}
                     >
                         {item?.emoji && (
                             <div className={styles.emojiWrapper}>{item.emoji}</div>

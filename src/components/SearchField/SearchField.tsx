@@ -33,7 +33,7 @@ const SearchField: FC<SearchFieldProps> = memo(
         const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
             onChange(e.target.value);
         }, [onChange]);
-
+        const focusedLiElementId = "option-1"; //FOCUSED element id not selected one use empty string if nothing in list is focused
         return (
             <div className={styles.inputFieldWrapper}>
                 <input
@@ -48,6 +48,7 @@ const SearchField: FC<SearchFieldProps> = memo(
                     aria-expanded={isExpanded}
                     aria-controls={controlsId}
                     aria-autocomplete={"list"}
+                    aria-activedescendant={focusedLiElementId}
                 />
                 <ChevronIcon className={styles.chevronIcon}/>
             </div>
